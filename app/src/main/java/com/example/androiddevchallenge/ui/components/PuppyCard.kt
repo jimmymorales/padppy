@@ -1,6 +1,5 @@
 package com.example.androiddevchallenge.ui.components
 
-import androidx.annotation.DrawableRes
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.Card
@@ -12,60 +11,63 @@ import androidx.compose.material.icons.filled.Female
 import androidx.compose.material.icons.filled.Male
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.androiddevchallenge.R
+import com.example.androiddevchallenge.model.Gender
+import com.example.androiddevchallenge.model.Puppy
+import com.example.androiddevchallenge.model.puppies
 import com.example.androiddevchallenge.ui.theme.PaddpyTheme
 
 @Composable
 fun PuppyCard(
-    name: String,
-    gender: Gender,
-    @DrawableRes imageId: Int = R.drawable.puppy1,
+    puppy: Puppy,
+    modifier: Modifier = Modifier
 ) {
-    Card(
-        modifier = Modifier
-            .width(180.dp)
-            .padding(16.dp)
-    ) {
+    Card(modifier = modifier) {
         Column(modifier = Modifier.padding(8.dp)) {
             Row(horizontalArrangement = Arrangement.End, modifier = Modifier.fillMaxWidth()) {
                 Icon(
-                    imageVector = when (gender) {
-                        Gender.MALE -> Icons.Default.Male
-                        Gender.FEMALE -> Icons.Default.Female
-                    },
-                    contentDescription = gender.description,
+                    imageVector = puppy.gender.icon,
+                    contentDescription = puppy.gender.description,
                     tint = MaterialTheme.colors.primary,
                 )
             }
             Image(
-                painter = painterResource(id = imageId),
-                contentDescription = "Picture of $name",
+                painter = painterResource(id = puppy.imageId),
+                contentDescription = "Picture of ${puppy.name}",
             )
-            Text(text = name)
+            Text(text = puppy.name)
         }
     }
 }
 
-enum class Gender(val description: String) {
-    FEMALE(description = "Female"),
-    MALE(description = "Male"),
-}
+private val Gender.icon: ImageVector
+    get() = when (this) {
+        Gender.MALE -> Icons.Default.Male
+        Gender.FEMALE -> Icons.Default.Female
+    }
 
-@Preview("Light Theme")
+private val Gender.description: String
+    get() = when (this) {
+        Gender.MALE -> "Male"
+        Gender.FEMALE -> "Female"
+    }
+
+
+@Preview("Light Theme", widthDp = 156)
 @Composable
 fun LightPreview() {
     PaddpyTheme {
-        PuppyCard(name = "Tom", gender = Gender.MALE)
+        PuppyCard(puppies.first())
     }
 }
 
-@Preview("Dark Theme")
+@Preview("Dark Theme", widthDp = 156)
 @Composable
 fun DarkPreview() {
     PaddpyTheme(darkTheme = true) {
-        PuppyCard(name = "Petunia", gender = Gender.FEMALE)
+        PuppyCard(puppies.last())
     }
 }
