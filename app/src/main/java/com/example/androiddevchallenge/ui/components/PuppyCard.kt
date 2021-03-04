@@ -37,6 +37,7 @@ fun PuppyCard(
             Image(
                 painter = painterResource(id = puppy.imageId),
                 contentDescription = "Picture of ${puppy.name}",
+                modifier = Modifier.height(160.dp),
             )
             Text(text = puppy.name)
         }
