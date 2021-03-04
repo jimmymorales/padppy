@@ -1,4 +1,4 @@
-package com.example.androiddevchallenge.ui.components
+package com.example.androiddevchallenge.ui.home.components
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
