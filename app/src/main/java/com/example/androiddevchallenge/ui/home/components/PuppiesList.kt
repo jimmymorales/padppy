@@ -17,10 +17,11 @@ import com.example.androiddevchallenge.model.Puppy
 fun PuppiesList(
     puppies: List<Puppy>,
     onPuppyClicked: (Puppy) -> Unit = {},
+    contentPadding: PaddingValues = PaddingValues(8.dp),
 ) {
     LazyVerticalGrid(
         cells = GridCells.Adaptive(minSize = 156.dp),
-        contentPadding = PaddingValues(8.dp),
+        contentPadding = contentPadding,
     ) {
         items(puppies) { puppy ->
             PuppyCard(

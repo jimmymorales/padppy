@@ -19,15 +19,23 @@ import android.os.Bundle
 import androidx.activity.compose.setContent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.core.view.WindowCompat
 import com.example.androiddevchallenge.ui.theme.PaddpyTheme
+import dev.chrisbanes.accompanist.insets.ProvideWindowInsets
 
 @ExperimentalFoundationApi
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        // This app draws behind the system bars, so we want to handle fitting system windows
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
         setContent {
             PaddpyTheme {
-                PadppyApp()
+                ProvideWindowInsets {
+                    PadppyApp()
+                }
             }
         }
     }

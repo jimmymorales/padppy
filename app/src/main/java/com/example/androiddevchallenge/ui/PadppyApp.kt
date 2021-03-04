@@ -30,7 +30,6 @@ fun PadppyApp() {
             arguments = listOf(navArgument(name = puppyIdArg) { type = NavType.LongType })
         ) { navBackStackEntry ->
             PuppyDetails(
-                navController = navController,
                 puppyId = navBackStackEntry.arguments?.getLong(puppyIdArg) ?: 0
             )
         }
