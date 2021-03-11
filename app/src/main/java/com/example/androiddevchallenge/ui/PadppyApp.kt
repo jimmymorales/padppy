@@ -7,10 +7,12 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.navArgument
+import androidx.navigation.compose.navigate
 import androidx.navigation.compose.rememberNavController
 import com.example.androiddevchallenge.ui.home.Home
 import com.example.androiddevchallenge.ui.puppy_details.PuppyDetails
 import com.example.androiddevchallenge.ui.puppy_details.puppyIdArg
+import com.example.androiddevchallenge.ui.puppy_details.routeWithParam
 import com.example.androiddevchallenge.ui.theme.PaddpyTheme
 
 sealed class Screen(val route: String) {
@@ -24,13 +26,20 @@ sealed class Screen(val route: String) {
 fun PadppyApp() {
     val navController = rememberNavController()
     NavHost(navController = navController, startDestination = Screen.Home.route) {
-        composable(route = Screen.Home.route) { Home(navController) }
+        composable(route = Screen.Home.route) {
+            Home(
+                navigateToPuppyDetails = { puppyId ->
+                    navController.navigate(Screen.PuppyDetails.routeWithParam(puppyId))
+                }
+            )
+        }
         composable(
             route = Screen.PuppyDetails.route,
             arguments = listOf(navArgument(name = puppyIdArg) { type = NavType.LongType })
         ) { navBackStackEntry ->
             PuppyDetails(
-                puppyId = navBackStackEntry.arguments?.getLong(puppyIdArg) ?: 0
+                puppyId = navBackStackEntry.arguments?.getLong(puppyIdArg) ?: 0,
+                navigateBack = navController::popBackStack
             )
         }
     }

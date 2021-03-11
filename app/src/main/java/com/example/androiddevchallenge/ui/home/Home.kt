@@ -9,16 +9,10 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.navigation.NavHostController
-import androidx.navigation.compose.navigate
 import com.example.androiddevchallenge.model.puppies
-import com.example.androiddevchallenge.ui.Screen
 import com.example.androiddevchallenge.ui.home.components.PuppiesList
-import com.example.androiddevchallenge.ui.puppy_details.routeWithParam
 import com.example.androiddevchallenge.ui.theme.PaddpyTheme
 import dev.chrisbanes.accompanist.insets.LocalWindowInsets
 import dev.chrisbanes.accompanist.insets.statusBarsHeight
@@ -26,16 +20,12 @@ import dev.chrisbanes.accompanist.insets.toPaddingValues
 
 @ExperimentalFoundationApi
 @Composable
-fun Home(navController: NavHostController) {
+fun Home(navigateToPuppyDetails: (puppyId: Long) -> Unit) {
     Scaffold {
         Box(Modifier.fillMaxSize()) {
             PuppiesList(
                 puppies = puppies,
-                onPuppyClicked = { puppy ->
-                    navController.navigate(
-                        Screen.PuppyDetails.routeWithParam(puppy.id)
-                    )
-                },
+                onPuppyClicked = { puppy -> navigateToPuppyDetails(puppy.id) },
                 contentPadding = LocalWindowInsets.current.systemBars.toPaddingValues()
             )
             Spacer(
@@ -53,7 +43,7 @@ fun Home(navController: NavHostController) {
 @Composable
 fun LightPreview() {
     PaddpyTheme {
-        Home(NavHostController(LocalContext.current))
+        Home(navigateToPuppyDetails = {})
     }
 }
 
@@ -62,6 +52,6 @@ fun LightPreview() {
 @Composable
 fun DarkPreview() {
     PaddpyTheme(darkTheme = true) {
-        Home(NavHostController(LocalContext.current))
+        Home(navigateToPuppyDetails = {})
     }
 }
