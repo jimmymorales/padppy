@@ -22,14 +22,14 @@ fun PadppyTopAppBar(title: String, onBackPressed: () -> Unit) {
             IconButton(onClick = onBackPressed) {
                 Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back button")
             }
-        }
+        },
     )
 }
 
 @Preview("Top app bar")
 @Composable
 fun PadppyTopAppBarPreview() {
-    PaddpyTheme {
+    PaddpyTheme(darkTheme = true) {
         PadppyTopAppBar(title = "Bella", onBackPressed = {})
     }
 }
