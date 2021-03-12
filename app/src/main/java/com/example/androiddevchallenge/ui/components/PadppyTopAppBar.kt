@@ -1,5 +1,6 @@
 package com.example.androiddevchallenge.ui.components
 
+import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
@@ -13,7 +14,11 @@ import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.ui.theme.PaddpyTheme
 
 @Composable
-fun PadppyTopAppBar(title: String, onBackPressed: () -> Unit) {
+fun PadppyTopAppBar(
+    title: String,
+    onBackPressed: () -> Unit,
+    actions: @Composable RowScope.() -> Unit = {},
+) {
     TopAppBar(
         title = { Text(text = title) },
         elevation = 0.dp,
@@ -23,6 +28,7 @@ fun PadppyTopAppBar(title: String, onBackPressed: () -> Unit) {
                 Icon(imageVector = Icons.Default.ArrowBack, contentDescription = "Back button")
             }
         },
+        actions = actions
     )
 }
 

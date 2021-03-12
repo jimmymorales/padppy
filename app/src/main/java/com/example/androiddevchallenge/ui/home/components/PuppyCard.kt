@@ -11,18 +11,15 @@ import androidx.compose.material.Card
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Female
-import androidx.compose.material.icons.filled.Male
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.example.androiddevchallenge.model.Gender
 import com.example.androiddevchallenge.model.Puppy
 import com.example.androiddevchallenge.model.puppies
+import com.example.androiddevchallenge.ui.components.description
+import com.example.androiddevchallenge.ui.components.icon
 import com.example.androiddevchallenge.ui.theme.PaddpyTheme
 
 @Composable
@@ -48,19 +45,6 @@ fun PuppyCard(
         }
     }
 }
-
-private val Gender.icon: ImageVector
-    get() = when (this) {
-        Gender.MALE -> Icons.Default.Male
-        Gender.FEMALE -> Icons.Default.Female
-    }
-
-private val Gender.description: String
-    get() = when (this) {
-        Gender.MALE -> "Male"
-        Gender.FEMALE -> "Female"
-    }
-
 
 @Preview("Light Theme", widthDp = 156)
 @Composable

@@ -7,18 +7,19 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import com.example.androiddevchallenge.model.puppies
 import com.example.androiddevchallenge.ui.Screen
 import com.example.androiddevchallenge.ui.components.PadppyTopAppBar
+import com.example.androiddevchallenge.ui.components.description
+import com.example.androiddevchallenge.ui.components.icon
+import com.example.androiddevchallenge.ui.puppy_details.components.PuppyDescriptionSurface
 import dev.chrisbanes.accompanist.insets.statusBarsHeight
 
 const val puppyIdArg = "puppyId"
@@ -39,7 +40,17 @@ fun PuppyDetails(puppyId: Long, navigateBack: () -> Unit) {
                     .statusBarsHeight()
                     .background(MaterialTheme.colors.background.copy(alpha = 0.9f))
             )
-            PadppyTopAppBar(title = puppy.name, onBackPressed = navigateBack)
+            PadppyTopAppBar(
+                title = puppy.name,
+                onBackPressed = navigateBack,
+                actions = {
+                    Icon(
+                        imageVector = puppy.gender.icon,
+                        contentDescription = puppy.gender.description,
+                        tint = MaterialTheme.colors.primary,
+                    )
+                },
+            )
             Image(
                 painter = painterResource(id = puppy.imageId),
                 contentDescription = "Picture of ${puppy.name}",
@@ -48,15 +59,11 @@ fun PuppyDetails(puppyId: Long, navigateBack: () -> Unit) {
                     .fillMaxSize()
                     .padding(16.dp),
             )
-            Surface(
-                modifier = Modifier
-                    .weight(weight = 1f, fill = true)
-                    .fillMaxSize()
-                    .clip(RoundedCornerShape(topStart = 48.dp, topEnd = 48.dp)),
-                elevation = 4.dp,
-            ) {
-
-            }
+            PuppyDescriptionSurface(
+                modifier = Modifier.weight(weight = 1f, fill = true),
+                puppy = puppy,
+                onAdoptClicked = {},
+            )
         }
     }
 }
