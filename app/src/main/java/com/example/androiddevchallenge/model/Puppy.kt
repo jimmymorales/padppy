@@ -1,3 +1,18 @@
+/*
+ * Copyright 2021 The Android Open Source Project
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     https://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ */
 package com.example.androiddevchallenge.model
 
 import androidx.annotation.DrawableRes
@@ -102,7 +117,7 @@ val puppies = listOf(
         imageId = R.drawable.puppy8,
         description = """
             Sadie is a shy girl who she needs some time to warm up to people but she is sweet once 
-            she knows you. Jumpette is currently in a foster home and she is enjoying her time with 
+            she knows you. Sadie is currently in a foster home and she is enjoying her time with 
             her foster brother.
         """.trimIndent(),
     ),
@@ -124,7 +139,7 @@ val puppies = listOf(
         imageId = R.drawable.puppy10,
         description = """
             Buddy is a quiet, docile and submissive doggie. Buddy might be a little shy at first 
-            but she will warm up to you with time, especially if you have treats! She will follow 
+            but he will warm up to you with time, especially if you have treats! He will follow 
             you around and will slowly try to get close to you.
         """.trimIndent(),
     ),
